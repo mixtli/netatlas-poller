@@ -1,0 +1,85 @@
+#!/usr/bin/env ruby
+$: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
+$LOAD_PATH << "/Users/rmcclain/Projects/net-snmp/lib"
+require 'rubygems'
+require 'curses'
+require 'gli'
+require 'netatlas'
+
+include GLI::App
+
+program_desc 'NetAtlas CLI'
+
+version NetAtlas::VERSION
+
+desc 'Output format'
+arg_name 'format'
+default_value "table"
+flag [:f, :format]
+
+desc 'Node commands'
+command :node do |n|
+  desc 'List nodes'
+  n.command :list do |l|
+    l.action do |global_options,options,args|
+      results = NetAtlas::Resource::Node.find
+      case global_options[:format]
+        when 'table'
+          puts NetAtlas::Renderer::Table.new(results, :id, :label, :description).render
+        when 'json'
+          puts results.to_json
+      else
+        raise "wtf?"
+      end
+    end
+  end
+
+  desc 'NetAtlas console'
+  command :console do |c|
+    c.action do |global_options, options, args|
+      init_screen
+    end
+  end
+end
+
+STATUS_LINE = 10
+def init_screen
+  Curses.noecho
+  Curses.init_screen
+  Curses.stdscr.keypad(true)
+  begin
+    write(STATUS_LINE+1, 0, "n=Nodes e=Events s=Services q=Quit")
+    loop do
+      case Curses.getch
+      when Curses::Key::UP
+      when Curses::Key::DOWN
+      when ?n
+      when ?e
+      when ?s
+      when ?q 
+      end
+    end
+  ensure
+    Curses.close_screen
+  end
+end
+
+def write(line, column, text)
+  Curses.setpos(line, column)
+  Curses.addstr(text)
+end
+pre do |global,command,options,args|
+  # Use skips_pre before a command to skip this block
+  true
+end
+
+post do |global,command,options,args|
+  # Use skips_post before a command to skip this
+end
+
+on_error do |exception|
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'daemons'
+
+# For local testing.  remove for production
+#$LOAD_PATH.unshift("/Users/rmcclain/RubymineProjects/netatlas-poller/lib")
+
+Daemons.run(File.dirname(__FILE__) + "/poller.rb")
+

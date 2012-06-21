@@ -1,0 +1,5 @@
+= netatlas
+
+Generate this with
+    netatlas rdoc
+After you have described your command line interface

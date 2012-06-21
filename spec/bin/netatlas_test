@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.join(File.dirname(__FILE__), "..")
+$LOAD_PATH << File.join(File.dirname(__FILE__), "..", "..", "lib")
+$LOAD_PATH << "/Users/rmcclain/Projects/net-snmp/lib"
+require 'active_support/core_ext'
+#silence_stream(STDOUT) do
+  require 'spec_helper'
+#end
+load File.join(File.dirname(__FILE__), "..", "..", "bin", "netatlas")

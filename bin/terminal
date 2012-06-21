@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+$: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
+$LOAD_PATH << "/Users/rmcclain/Projects/net-snmp/lib"
+require 'rubygems'
+require 'netatlas'
+require 'rbcurse'
+require 'rbcurse/core/util/app'
+
+helptext =<<-HELPTEXT 
+  This is some help text
+HELPTEXT
+def resize
+  #puts "resizing"
+  tab = @form.by_name["nodelist"]
+  cols = Ncurses.COLS
+  rows = Ncurses.LINES
+  tab.width_pc ||= (1.0*tab.width / $orig_cols)
+  tab.height_pc ||= (1.0*tab.height / $orig_rows)
+  tab.height = (tab.height_pc * rows).floor
+  tab.width = (tab.width_pc * cols).floor
+end
+
+def pick_fields(collection, *fields)
+  collection.map {|r| r.attributes.slice(*fields).values}
+end
+
+App.new do
+  $orig_cols = Ncurses.COLS
+  $orig_rows = Ncurses.LINES
+  menubar do
+    keep_visible true
+    menu "Devices" do
+      item "List", "L" do
+        command do
+        end
+      end
+    end
+  end 
+  app_header "NetAtlas", :text_center => "Node List", :text_right =>"10 nodes"
+  message "Press q to quit "  
+  nodes = NetAtlas::Resource::Node.find
+  flow :margin_top => 1, :height => FFI::NCurses.LINES-2 do
+    table = tabular_widget :name => "nodelist", :print_footer => true
+    table.columns = %w(ID Label State)
+    table.set_content(pick_fields(NetAtlas::Resource::Node.find), :id, :label, :state)
+    alert "found #{nodes.size}" 
+    table.column_align 0, :right
+    table.bind_key(?d, "Delete Row") {
+      if confirm("Delete #{table.current_value}?")
+        table.delete_at table.current_index
+      end
+    }
+  end
+  bind_key(KEY_F1, 'help'){ display_app_help }
+  bind_key(?q, 'Quit') { throw(:close)}
+
+  status_line :row => FFI::NCurses.LINES - 1
+
+  install_help_text helptext
+  @form.bind(:RESIZE) {  resize }
+end

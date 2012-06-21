@@ -1,0 +1,118 @@
+D, [2012-06-16T05:44:49.031802 #28270] DEBUG -- : START 8 colors  --------- ./terminal win:  
+D, [2012-06-16T05:44:49.031982 #28270] DEBUG -- : XXX APP CONFIG: {}  
+D, [2012-06-16T05:44:49.036489 #28270] DEBUG -- :  assigning ["\x18", "c"] , A0 24 , A1 99 
+D, [2012-06-16T05:44:49.036607 #28270] DEBUG -- :  assigning 58  
+D, [2012-06-16T05:44:49.036646 #28270] DEBUG -- :  assigning 248  
+D, [2012-06-16T05:44:49.036697 #28270] DEBUG -- :  assigning ["q", "q"] , A0 113 , A1 113 
+D, [2012-06-16T05:44:49.039144 #28270] DEBUG -- : XXX:  INSIDE LISTBINDING FOR RubyCurses::List 
+D, [2012-06-16T05:44:49.039322 #28270] DEBUG -- :  assigning 106  
+D, [2012-06-16T05:44:49.039371 #28270] DEBUG -- :  assigning 107  
+D, [2012-06-16T05:44:49.039406 #28270] DEBUG -- :  assigning 4  
+D, [2012-06-16T05:44:49.039440 #28270] DEBUG -- :  assigning 2  
+D, [2012-06-16T05:44:49.039500 #28270] DEBUG -- :  assigning ["g", "g"] , A0 103 , A1 103 
+D, [2012-06-16T05:44:49.039540 #28270] DEBUG -- :  assigning 71  
+D, [2012-06-16T05:44:49.039589 #28270] DEBUG -- :  assigning ["'", "'"] , A0 39 , A1 39 
+D, [2012-06-16T05:44:49.039634 #28270] DEBUG -- :  assigning 47  
+D, [2012-06-16T05:44:49.039671 #28270] DEBUG -- :  assigning 110  
+D, [2012-06-16T05:44:49.039718 #28270] DEBUG -- :  assigning 236  
+D, [2012-06-16T05:44:49.039755 #28270] DEBUG -- :  assigning 232  
+D, [2012-06-16T05:44:49.039807 #28270] DEBUG -- :  assigning ["\x18", "\x13"] , A0 24 , A1 19 
+D, [2012-06-16T05:44:49.039862 #28270] DEBUG -- :  assigning ["\x18", "e"] , A0 24 , A1 101 
+D, [2012-06-16T05:44:49.039903 #28270] DEBUG -- :  assigning 102  
+D, [2012-06-16T05:44:49.039938 #28270] DEBUG -- :  assigning 246  
+D, [2012-06-16T05:44:49.039986 #28270] DEBUG -- :  assigning 43  
+D, [2012-06-16T05:44:49.040022 #28270] DEBUG -- :  assigning 45  
+D, [2012-06-16T05:44:49.040062 #28270] DEBUG -- :  assigning 97  
+D, [2012-06-16T05:44:49.040098 #28270] DEBUG -- :  assigning 42  
+D, [2012-06-16T05:44:49.040132 #28270] DEBUG -- :  assigning 117  
+D, [2012-06-16T05:44:49.040885 #28270] DEBUG -- :  assigning 100  
+D, [2012-06-16T05:44:49.040993 #28270] DEBUG -- :  form repaint:,  , r -1 c -1 
+D, [2012-06-16T05:44:49.041316 #28270] DEBUG -- :  def print_top_right(10 nodes)
+D, [2012-06-16T05:44:49.041420 #28270] DEBUG -- : BASICLIST REPAINT WILL HAPPEN 0 
+D, [2012-06-16T05:44:49.041467 #28270] DEBUG -- : basiclistbox repaint  nodeslist graphic Window::ROOTW
+D, [2012-06-16T05:44:49.041517 #28270] DEBUG -- :  inside window print_border r 1 c 0 h 35 w 224 
+D, [2012-06-16T05:44:49.046827 #28270] DEBUG -- :  rbasiclistbox 3, w:224 , maxlen: 
+D, [2012-06-16T05:44:49.048703 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:49.048787 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 2 , c = , parent:   
+D, [2012-06-16T05:44:49.048825 #28270] DEBUG -- : inside def fire_handler evt:ENTER, o: RubyCurses::List
+D, [2012-06-16T05:44:49.048871 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 2 , c = , parent:   
+D, [2012-06-16T05:44:49.048910 #28270] DEBUG -- :  set_form_col in rlistbox 0+ left_margin 0 ( 1 ) 
+D, [2012-06-16T05:44:49.048948 #28270] DEBUG -- :  addcols 0 addrow 0 :  r =  , c = 1, parent:   
+D, [2012-06-16T05:44:49.049010 #28270] DEBUG -- :  form repaint:,  , r 2 c 1 
+D, [2012-06-16T05:44:49.049057 #28270] DEBUG -- : setpos : () 2 1 XXX
+D, [2012-06-16T05:44:49.057693 #28270] DEBUG -- : setpos : () 2 1 XXX
+D, [2012-06-16T05:44:50.391801 #28270] DEBUG -- :  assigning 191  
+D, [2012-06-16T05:44:50.391906 #28270] DEBUG -- :  assigning 63  
+D, [2012-06-16T05:44:50.391960 #28270] DEBUG -- :  assigning 186  
+D, [2012-06-16T05:44:50.392038 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:50.392100 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:50.392194 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:50.392237 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 3 , c = , parent:   
+D, [2012-06-16T05:44:50.392282 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:50.392344 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:50.392380 #28270] DEBUG -- :  form repaint:,  , r 3 c 1 
+D, [2012-06-16T05:44:50.392423 #28270] DEBUG -- : setpos : () 3 1 XXX
+D, [2012-06-16T05:44:50.615695 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:50.615812 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:50.615907 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:50.615961 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 4 , c = , parent:   
+D, [2012-06-16T05:44:50.616001 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:50.616037 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:50.616071 #28270] DEBUG -- :  form repaint:,  , r 4 c 1 
+D, [2012-06-16T05:44:50.616115 #28270] DEBUG -- : setpos : () 4 1 XXX
+D, [2012-06-16T05:44:50.799704 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:50.799818 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:50.799856 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:50.799890 #28270] DEBUG -- :  form repaint:,  , r 4 c 1 
+D, [2012-06-16T05:44:50.799933 #28270] DEBUG -- : setpos : () 4 1 XXX
+D, [2012-06-16T05:44:51.023729 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:51.023844 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:51.023892 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:51.023926 #28270] DEBUG -- :  form repaint:,  , r 4 c 1 
+D, [2012-06-16T05:44:51.023969 #28270] DEBUG -- : setpos : () 4 1 XXX
+D, [2012-06-16T05:44:51.655649 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:51.655770 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:51.655860 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:51.655902 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 3 , c = , parent:   
+D, [2012-06-16T05:44:51.655940 #28270] DEBUG -- : handled inside Form 259 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:51.655974 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:51.656016 #28270] DEBUG -- :  form repaint:,  , r 3 c 1 
+D, [2012-06-16T05:44:51.656059 #28270] DEBUG -- : setpos : () 3 1 XXX
+D, [2012-06-16T05:44:51.879830 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:51.879947 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:51.880039 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:51.880082 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 2 , c = , parent:   
+D, [2012-06-16T05:44:51.880121 #28270] DEBUG -- : handled inside Form 259 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:51.880155 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:51.880188 #28270] DEBUG -- :  form repaint:,  , r 2 c 1 
+D, [2012-06-16T05:44:51.880230 #28270] DEBUG -- : setpos : () 2 1 XXX
+D, [2012-06-16T05:44:53.543686 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:53.543794 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:53.543883 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:53.543925 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 3 , c = , parent:   
+D, [2012-06-16T05:44:53.543973 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:53.544007 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:53.544040 #28270] DEBUG -- :  form repaint:,  , r 3 c 1 
+D, [2012-06-16T05:44:53.544109 #28270] DEBUG -- : setpos : () 3 1 XXX
+D, [2012-06-16T05:44:53.767511 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:53.767629 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:53.767719 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:53.767762 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 4 , c = , parent:   
+D, [2012-06-16T05:44:53.767799 #28270] DEBUG -- : handled inside Form 258 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:53.767841 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:53.767874 #28270] DEBUG -- :  form repaint:,  , r 4 c 1 
+D, [2012-06-16T05:44:53.767916 #28270] DEBUG -- : setpos : () 4 1 XXX
+D, [2012-06-16T05:44:54.351573 #28270] DEBUG -- : rwidget BLOCK called _process_key 
+D, [2012-06-16T05:44:54.351695 #28270] DEBUG -- : inside def fire_handler evt:LEAVE_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:54.351787 #28270] DEBUG -- : inside def fire_handler evt:ENTER_ROW, o: RubyCurses::List
+D, [2012-06-16T05:44:54.351830 #28270] DEBUG -- :  addcols 0 addrow 0 :  r = 3 , c = , parent:   
+D, [2012-06-16T05:44:54.351869 #28270] DEBUG -- : handled inside Form 259 from #<RubyCurses::List:0x007fb948a7f0b8> got 0  
+D, [2012-06-16T05:44:54.351903 #28270] DEBUG -- :  form before repaint  , , ret 
+D, [2012-06-16T05:44:54.351936 #28270] DEBUG -- :  form repaint:,  , r 3 c 1 
+D, [2012-06-16T05:44:54.351979 #28270] DEBUG -- : setpos : () 3 1 XXX
+D, [2012-06-16T05:51:56.030286 #28270] DEBUG -- :  INSIDE CLOSE, true 
+D, [2012-06-16T05:51:56.030382 #28270] DEBUG -- : win destroy start
+D, [2012-06-16T05:51:56.030581 #28270] DEBUG -- : win destroy end
+D, [2012-06-16T05:51:56.030615 #28270] DEBUG -- :  INSIDE CLOSE, true 
+D, [2012-06-16T05:51:56.030729 #28270] DEBUG -- :  CLOSING NCURSES
+D, [2012-06-16T05:51:56.032376 #28270] DEBUG -- :  CLOSING APP

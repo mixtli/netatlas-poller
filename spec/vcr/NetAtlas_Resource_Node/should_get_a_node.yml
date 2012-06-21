@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://test.lvh.me:3001/nodes/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - ! '"d35b212e97f7d17ef03feefbef4db762"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 2516ebfb421ecf00630329ef0ef47872
+      x-runtime:
+      - '0.014648'
+      content-length:
+      - '242'
+      connection:
+      - close
+      server:
+      - thin 1.3.1 codename Triple Espresso
+    body:
+      encoding: US-ASCII
+      string: ! '{"created_at":"2012-06-13T19:08:20Z","creator_id":null,"deleted_at":null,"deleter_id":null,"description":"bar","device_id":null,"id":1,"label":"foobar","snmp_index":null,"state":"unknown","updated_at":"2012-06-13T19:08:20Z","updater_id":null}'
+    http_version: 
+  recorded_at: Thu, 14 Jun 2012 02:08:20 GMT
+recorded_with: VCR 2.2.1

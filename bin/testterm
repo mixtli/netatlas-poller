@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+require 'rbcurse'
+require 'rbcurse/core/util/app'
+require 'netatlas/terminal/dsl'
+
+require 'netatlas'
+
+include NetAtlas::Terminal::DSL
+include NetAtlas::Resource
+$log = Logger.new("tout.log")
+$log.level = Logger::DEBUG
+
+$log.debug "starting up"
+init
+
+window :root_view => :device_list do
+  $log.debug "window"
+  menubar do
+    $log.debug "building menubar"
+    keep_visible true
+    menu 'Devices' do
+      $log.debug "building menu"
+      item 'List' do
+        $log.debug "building item"
+        #window.root_view = views[:device_list]
+      end
+      item 'Create' do
+        #window.root_view = views[:device_create]
+      end
+    end
+    menu 'Services' do
+      item 'List' do
+        #window.root_view = views[:service_list]
+      end
+      item 'Create' do
+        #window.root_view = views[:service_create]
+      end
+    end
+  end
+
+
+  # view :device_list do
+  #   table :device_table do
+  #     headers %w(ID Hostname)
+  #     collection { Device.find }
+  #     data {|d| d.attributes.slice(:id, :hostname).values}
+  #     row do
+  #       bind_key :enter do
+  #         window.root_view = views[:device_edit]
+  #       end
+  #     end
+  #   end
+  # end
+
+  # view :device_create do
+  #   form do
+  #     text_field :hostname, :width => 20 
+  #     process do
+  #       Device.create(values)
+  #       window.root_view = views[:device_list]
+  #     end
+  #   end
+  # end
+
+  # view :device_edit do
+  #   form do
+  #     text_field :hostname, views[:device_table].selected.hostname
+  #     process do
+  #       views[:device_table].selected.update(values)
+  #       window.root_view = views[:device_list]
+  #     end
+  #   end
+  # end
+
+  # view :service_list do
+  #   table do
+  #     headers %w(ID Hostname Label)
+  #     data { Service.find.map {|s| s.attributes.slice(:id, :hostname, :label).values}}
+  #   end
+  # end
+
+  # view :service_create do
+  #   form do
+  #     text_field :label
+  #     combo_field :device, :options => lambda { Device.find.map {|d| [d.id, d.hostname]}}
+  #     combo_field :plugin, :options => lambda { Plugin.find.map {|d| [d.id, d.name]}}
+  #     process do
+  #       Service.create(values)
+  #     end
+  #   end
+  # end
+
+
+  # bind_key(?q) { quit }
+  # bind_key(?d) { window.root_view = views[:device_list] }
+  # bind_key(?s) { window.root_view = views[:service_list] }
+end
+
+run
