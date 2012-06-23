@@ -7,7 +7,6 @@ describe NetAtlas::Renderer::Table do
    :foo, {:field => :baz, :color => :red}, :bar) 
   }
   it "should render a table" do  
-    puts subject.render
     subject.render.should include("more stuff")
   end
 end

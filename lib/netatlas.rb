@@ -4,6 +4,7 @@ require 'faraday'
 require 'faraday_middleware'
 require 'active_support/core_ext'
 require 'command_line_reporter'
+require 'netatlas/client'
 require "netatlas/version"
 require 'netatlas/error'
 require "netatlas/config"

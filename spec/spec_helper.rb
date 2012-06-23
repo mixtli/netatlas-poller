@@ -4,6 +4,7 @@
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'simplecov'
 require 'fabrication'
 require 'rspec'
 require 'sequel'
@@ -12,6 +13,9 @@ require 'pry'
 require 'evented-spec'
 require 'database_cleaner'
 require 'aruba/api'
+
+
+SimpleCov.start if File.basename($0) == 'rspec'
 
 DB = Sequel.connect('postgres://postgres@localhost/netatlas_test')
 require 'netatlas'

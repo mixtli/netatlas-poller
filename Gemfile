@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in netatlas-poller.gemspec
 gemspec
 gem 'net-snmp', :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
+gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
 #gem 'rake'
 gem 'rspec'
 gem 'evented-spec'
@@ -22,3 +23,4 @@ gem 'fabrication'
 gem 'aruba'
 gem 'command_line_reporter'
 gem 'rbcurse-core', :github => 'rkumar/rbcurse-core'
+gem 'simplecov', :require => false
