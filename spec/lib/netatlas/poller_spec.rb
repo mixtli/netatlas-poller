@@ -16,8 +16,8 @@ describe NetAtlas::Poller do
 
   it "should gather configuration information" do
     subject.stub!(:get_data_sources).and_return({
-      1 => NetAtlas::Resource::DataSource.new(ip_address: '127.0.0.1', plugin_name: 'HTTP'),
-      2 => NetAtlas::Resource::DataSource.new(ip_address: '127.0.0.1', plugin_name: 'SSH')
+      1 => NetAtlas::Resource::DataSource.new(:ip_address => '127.0.0.1', :plugin_name => 'HTTP'),
+      2 => NetAtlas::Resource::DataSource.new(:ip_address => '127.0.0.1', :plugin_name => 'SSH')
     })
 
     subject.configure
@@ -25,36 +25,35 @@ describe NetAtlas::Poller do
     subject.data_sources.count.should == 2
   end
 
-  let(:command_msg) {{
-    'id' => 1,
-    'command' => 'scan',
-    'arguments' => {
-      'device' => {
-        'id' => 1,
-        'ip_address' => '127.0.0.1',
-        'hostname' => 'lvh.me'
+  it "should discover device from the queue" do
+    command_msg = {
+      'id' => 1,
+      'command' => 'scan',
+      'arguments' => {
+        'device' => {
+          'id' => 1,
+          'ip_address' => '127.0.0.1',
+          'hostname' => 'lvh.me'
+        }
       }
     }
-  }}
 
-  it "should discover device from the queue" do
     amqp do
      # Net::SNMP::Dispatcher.run_loop
-      subject.start_command_queue
-      AMQP::Channel.new do |channel|
-        NetAtlas::Plugin::SNMP.any_instance.should_receive(:do_scan).once.and_return({'foo' => 'bar'})
-        channel.direct("").publish(command_msg.to_json, :routing_key => "command_#{subject.id}")
-        queue = channel.queue('command_result', :durable => true)
-        queue.subscribe do |hdr, msg|
-          msg = JSON.parse(msg)
-          msg.should eql(command_msg.merge({
-            'result' => {
-              'status' => true,
-              'message' => 'Completed scan of lvh.me'
-            }
-          }))
-          done { queue.unsubscribe; queue.delete }
-        end
+      subject.setup
+      NetAtlas::Plugin::SNMP.any_instance.should_receive(:do_scan).once.and_return({'foo' => 'bar'})
+      subject.amq.direct("").publish(command_msg.to_json, :routing_key => "command_#{subject.id}")
+      queue = subject.amq.queue('command_result', :durable => true)
+      queue.subscribe do |hdr, msg|
+        msg = JSON.parse(msg)
+        msg.should eql(command_msg.merge({
+          'result' => {
+            'status' => true,
+            'message' => 'Completed scan of lvh.me'
+          }
+        }))
+        hdr.ack
+        done { queue.unsubscribe; queue.delete }
       end
     end
   end

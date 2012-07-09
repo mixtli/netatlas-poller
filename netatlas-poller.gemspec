@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "daemons"
   #gem.add_dependency "activeresource"
-  gem.add_dependency 'amqp'
-  gem.add_dependency 'eventmachine'
+  gem.add_dependency 'amqp', '0.7.4'
+  gem.add_dependency 'eventmachine', '~> 1.0.0.beta.4'
   gem.add_dependency 'faraday'
   gem.add_dependency 'faraday_middleware'
   gem.add_dependency 'activesupport'
