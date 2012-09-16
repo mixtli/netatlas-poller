@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in netatlas-poller.gemspec
 gemspec
-gem 'net-snmp', :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
-gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
+gem 'net-snmp' #, :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
+gem 'netatlas-client' #, :path => '/Users/rmcclain/Projects/netatlas-client'
 #gem 'rake'
 gem 'rspec'
 gem 'evented-spec'

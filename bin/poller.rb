@@ -1,5 +1,5 @@
 require 'rubygems'
-#$LOAD_PATH << "../lib"
+$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
 require 'netatlas'
 
 #poller = NetAtlas::Poller.singleton
