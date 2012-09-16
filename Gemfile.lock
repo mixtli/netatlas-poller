@@ -22,7 +22,7 @@ PATH
   remote: .
   specs:
     netatlas-poller (0.0.1)
-      activesupport
+      active_support
       amqp (= 0.7.4)
       daemons
       eventmachine (~> 1.0.0.beta.4)
