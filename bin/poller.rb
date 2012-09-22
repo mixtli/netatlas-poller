@@ -4,7 +4,7 @@ require 'netatlas'
 
 #poller = NetAtlas::Poller.singleton
 
-poller = NetAtlas::Poller.new
+poller = NetAtlas::Poller.instance
 poller.configure
 poller.run
 

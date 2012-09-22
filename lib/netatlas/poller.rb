@@ -1,11 +1,14 @@
 class NetAtlas::Poller < NetAtlas::Resource::Base
   attr_reader :amq
+  self.uri = '/pollers'
+  self.schema = {:id => Integer, :hostname => String}
+
   def self.instance
     hostname = CONFIG['hostname'] || `hostname`.chomp
     @@instance ||= self.find(:hostname => hostname).first
   end
 
-  def initialize(args)
+  def initialize(args = {})
     super
     @timers = []
     @current_checks = []
