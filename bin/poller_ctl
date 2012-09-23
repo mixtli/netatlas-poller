@@ -4,6 +4,7 @@ require 'daemons'
 
 # For local testing.  remove for production
 #$LOAD_PATH.unshift("/Users/rmcclain/RubymineProjects/netatlas-poller/lib")
+pwd  = File.dirname(File.expand_path(__FILE__))
 
-Daemons.run(File.dirname(__FILE__) + "/poller.rb")
+Daemons.run(File.dirname(__FILE__) + "/poller.rb", :dir_mode => :normal, :dir => File.join(pwd, '../tmp/pids'))
 
