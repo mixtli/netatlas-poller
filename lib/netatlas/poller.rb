@@ -6,7 +6,7 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
   def self.instance
     @@instance ||= nil
     return @@instance if @@instance
-    poller_id = File.read('/etc/netatlas/poller.id')
+    poller_id = File.read('/etc/netatlas/poller.id') rescue nil
     if poller_id
      @@instance ||= self.get(poller_id)
      raise "Failed to find poller with id #{poller_id}" unless @@instance
