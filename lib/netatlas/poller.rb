@@ -4,6 +4,7 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
   self.schema = {:id => Integer, :hostname => String}
 
   def self.instance
+    @@instance ||= nil
     return @@instance if @@instance
     poller_id = File.read('/etc/netatlas/poller.id')
     if poller_id
@@ -13,8 +14,7 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
       @@instance = self.create(:hostname => `hostname`)
       File.open('/etc/netatlas/poller.id', 'w') {|f| f.write(@@instance.id.to_s) }
     end
-    hostname = CONFIG['hostname'] || `hostname`.chomp
-    @@instance ||= self.find(:hostname => hostname).first
+    @@instance
   end
 
   def initialize(args = {})
