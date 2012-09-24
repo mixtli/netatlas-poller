@@ -22,6 +22,18 @@ test:
     :host: 127.0.0.1
     :vhost: netatlas_test
 
+staging:
+  netatlas_url: http://test.lvh.me
+  netatlas_user: test@netatlas.com
+  netatlas_password: password
+  logfile: /tmp/poller.log
+  loglevel: debug
+  amqp:
+    :user: netatlas
+    :pass: netatlas
+    :host: 127.0.0.1
+    :vhost: netatlas_production
+
 production:
   netatlas_url: http://test.lvh.me
   netatlas_user: test@netatlas.com
