@@ -5,13 +5,15 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
   def self.instance
     @@instance ||= nil
+    puts "instance now #{@@instance}"
     return @@instance if @@instance
     poller_id = File.read('/etc/netatlas/poller.id') rescue nil
     if poller_id
      @@instance ||= self.get(poller_id)
      raise "Failed to find poller with id #{poller_id}" unless @@instance
     else
-      @@instance = self.create(:hostname => `hostname`)
+      puts "creating instance with hostname" + `hostname`
+      @@instance = self.create(:hostname => `hostname`.chomp)
       File.open('/etc/netatlas/poller.id', 'w') {|f| f.write(@@instance.id.to_s) }
     end
     @@instance

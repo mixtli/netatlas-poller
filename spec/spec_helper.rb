@@ -20,6 +20,7 @@ SimpleCov.start if File.basename($0) == 'rspec'
 DB = Sequel.connect('postgres://postgres@localhost/netatlas_test')
 require 'netatlas'
 require 'mocks/poller_mock'
+require 'netatlas/factories'
 Dir['./spec/support/*.rb'].map {|f| require f}
 
 RSpec.configure do |config|
@@ -35,6 +36,7 @@ RSpec.configure do |config|
 
   config.before(:each) do 
     DatabaseCleaner.clean
+    Fabricate(:admin)
   end
 
   config.after(:each) do

@@ -13,16 +13,28 @@ describe NetAtlas::Poller do
       channel.queue('command_result', :durable => true).purge
     end
   end
+  before do
+    Fabricate(:test_user)
+    begin
+      FileUtils.rm('/etc/netatlas/poller.id') 
+    rescue
+    end
+  end
 
-  it "should gather configuration information" do
-    subject.stub!(:get_data_sources).and_return({
-      1 => NetAtlas::Resource::DataSource.new(:ip_address => '127.0.0.1', :plugin_name => 'HTTP'),
-      2 => NetAtlas::Resource::DataSource.new(:ip_address => '127.0.0.1', :plugin_name => 'SSH')
-    })
+  it "should register itself", :vcr do
+    puts ::CONFIG.inspect
+    instance = described_class.instance
+    instance.hostname.should eql(`hostname`.chomp)
+    File.read('/etc/netatlas/poller.id').should eql(instance.id.to_s)
+  end
 
+  it "should gather configuration information", :vcr do
+    2.times { Fabricate(:data_source) }
+    5.times do
+      Fabricate(:data_stream, :poller_id => subject.id)
+    end
     subject.configure
-    subject.ip_address.should eql('127.0.0.1')
-    subject.data_sources.count.should == 2
+    subject.data_sources.count.should == 5
   end
 
   it "should discover device from the queue" do

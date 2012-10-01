@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 gem 'net-snmp' #, :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
 
-if ENV['RAILS_ENV'] == 'development'
+if ENV['NETATLAS_ENV'] == 'development' || ENV['NETATLAS_ENV'] == 'test'
   gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
 else
   gem 'netatlas-client', :git => 'git@github.com:mixtli/netatlas-client.git' #, :path => '/Users/rmcclain/Projects/netatlas-client'
@@ -15,6 +15,7 @@ end
 gem 'rspec'
 gem 'evented-spec'
 gem 'guard'
+gem 'rb-fsevent'
 gem 'guard-rspec'
 gem 'guard-ctags-bundler'
 gem 'pg'
