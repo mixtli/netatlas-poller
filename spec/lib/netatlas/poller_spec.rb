@@ -22,7 +22,6 @@ describe NetAtlas::Poller do
   end
 
   it "should register itself", :vcr do
-    puts ::CONFIG.inspect
     instance = described_class.instance
     instance.hostname.should eql(`hostname`.chomp)
     File.read('/etc/netatlas/poller.id').should eql(instance.id.to_s)
@@ -67,6 +66,33 @@ describe NetAtlas::Poller do
         hdr.ack
         done { queue.unsubscribe; queue.delete }
       end
+    end
+  end
+
+  it "should poll a service" do
+    async do
+      ds = NetAtlas::Resource::DataSource.new :ip_address => '127.0.0.1', :plugin_name => 'Ping'
+      result = subject.poll(ds)
+      result.should be_kind_of(NetAtlas::Result)
+      result.value.should be_kind_of(Float)
+      result.value.should be > 0
+    end
+  end
+
+  it "should schedule and run polls" do
+    described_class.stub(:instance =>  described_class.new) 
+    async do
+      sources = {
+        1 => NetAtlas::Resource::DataSource.new(:id => 1,:ip_address => '74.125.224.80',:plugin_name => 'Ping'), 
+        2 => NetAtlas::Resource::DataSource.new(:id => 2,:ip_address => '127.0.0.1',:plugin_name => 'Ping')
+      }
+      subject.should_receive(:get_data_sources).and_return(sources)
+      subject.do_scheduler
+      subject.stub(:post)
+      result = subject.next_poll(false)
+      result2 = subject.next_poll(false)
+      result.should be_kind_of NetAtlas::Result
+      result2.should be_kind_of NetAtlas::Result
     end
   end
 end

@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in netatlas-poller.gemspec
 gemspec
-gem 'net-snmp' #, :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
+#gem 'net-snmp' #, :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
 
 if ENV['NETATLAS_ENV'] == 'development' || ENV['NETATLAS_ENV'] == 'test'
   gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
 else
-  gem 'netatlas-client', :git => 'git@github.com:mixtli/netatlas-client.git' #, :path => '/Users/rmcclain/Projects/netatlas-client'
+  gem 'netatlas-client', :git => 'git@github.com:mixtli/netatlas-client.git' 
 end
 
 
@@ -29,6 +29,5 @@ gem 'pry-debugger'
 gem 'database_cleaner'
 gem 'fabrication'
 gem 'aruba'
-gem 'command_line_reporter'
 gem 'rbcurse-core', :github => 'rkumar/rbcurse-core'
 gem 'simplecov', :require => false

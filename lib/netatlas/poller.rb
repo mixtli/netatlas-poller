@@ -1,3 +1,5 @@
+require 'netatlas/client'
+require 'netatlas/resource'
 class NetAtlas::Poller < NetAtlas::Resource::Base
   attr_reader :amq
   self.uri = '/pollers'
@@ -5,14 +7,12 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
   def self.instance
     @@instance ||= nil
-    puts "instance now #{@@instance}"
     return @@instance if @@instance
     poller_id = File.read('/etc/netatlas/poller.id') rescue nil
     if poller_id
      @@instance ||= self.get(poller_id)
      raise "Failed to find poller with id #{poller_id}" unless @@instance
     else
-      puts "creating instance with hostname" + `hostname`
       @@instance = self.create(:hostname => `hostname`.chomp)
       File.open('/etc/netatlas/poller.id', 'w') {|f| f.write(@@instance.id.to_s) }
     end
@@ -42,18 +42,29 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
     setup_rabbitmq_monitor
   end
 
-  def next_poll
+  def next_poll(runloop = true)
+    result = nil
     @queue.pop do |ds|
       @queued[ds.id] = false
-      poll(ds)
-      next_poll
+      result = poll(ds)
+      ds.last_result = result
+      post(result)
+      next_poll if runloop
     end  
+    result
   end
 
   def poll(ds)
     plugin = ds.get_plugin
-    result = plugin.poll(ds)
-    ds.last_result = result
+    #f = Fiber.current
+    #plugin.poll(ds) do |result|
+    #  f.resume(result)
+    #end
+    #result = Fiber.yield
+    plugin.poll(ds)
+  end
+
+  def post(result)
     collector_exchange.publish({:poller_id => id, :result => result.as_json}.to_json)
   end
 
@@ -120,6 +131,14 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
   def data_sources
     @data_sources ||= get_data_sources
+  end
+
+  def add_data_source(ds)
+    @data_sources[ds.id] = ds
+  end
+
+  def remove_data_source(ds)
+    @data_sources.delete(ds.id)
   end
 
   def get_data_sources

@@ -9,6 +9,8 @@ development:
     :pass: netatlas
     :host: 127.0.0.1
     :vhost: netatlas_development
+  nagios:
+    :plugin_dir: /usr/local/sbin
 
 test:
   netatlas_url: http://test.lvh.me:3001
@@ -21,6 +23,8 @@ test:
     :pass: netatlas
     :host: 127.0.0.1
     :vhost: netatlas_test
+  :nagios:
+    :plugin_dir: /usr/local/sbin
 
 staging:
   netatlas_url: http://test.lvh.me
@@ -33,6 +37,8 @@ staging:
     :pass: netatlas
     :host: 127.0.0.1
     :vhost: netatlas_production
+  :nagios:
+    :plugin_dir: /usr/local/sbin
 
 production:
   netatlas_url: http://test.lvh.me
@@ -45,4 +51,6 @@ production:
     :pass: netatlas
     :host: 127.0.0.1
     :vhost: netatlas_production
+  nagios:
+    :plugin_dir: /usr/local/sbin
 

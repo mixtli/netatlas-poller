@@ -11,9 +11,9 @@ require "netatlas/config"
 require 'netatlas/resource'
 require "netatlas/poller"
 require 'netatlas/command'
-require 'netatlas/command/scan'
+Dir[File.dirname(__FILE__) + '/netatlas/command/*.rb'].each {|f| require f }
 require 'netatlas/plugin'
-require 'netatlas/plugin/snmp'
+Dir[File.dirname(__FILE__) + '/netatlas/plugin/*.rb'].each {|f| require f }
 require 'netatlas/resource/node'
 require "netatlas/resource/data_source"
 require 'netatlas/resource/device'
