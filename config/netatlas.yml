@@ -2,7 +2,7 @@ development:
   netatlas_url: http://netatlas.dev
   netatlas_user: test@netatlas.com
   netatlas_password: password
-  logfile: /tmp/poller.log
+  logfile: /Users/rmcclain/Projects/netatlas-poller/log/poller.log
   loglevel: debug
   amqp:
     :user: netatlas

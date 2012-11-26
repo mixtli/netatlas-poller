@@ -13,6 +13,7 @@ require 'pry'
 require 'evented-spec'
 require 'database_cleaner'
 require 'aruba/api'
+require 'rabbit_manager'
 
 
 SimpleCov.start if File.basename($0) == 'rspec'
@@ -35,6 +36,13 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do 
+    rabbit = RabbitManager.new("http://guest:guest@localhost:55672")
+    begin
+      rabbit.delete_vhost("netatlas_test")
+    rescue
+    end
+    rabbit.add_vhost("netatlas_test")
+    rabbit.add_permission("netatlas", {'read' => '.*', 'write' => '.*', 'configure' => '.*'}, {:vhost => 'netatlas_test'})
     DatabaseCleaner.clean
     Fabricate(:admin)
   end

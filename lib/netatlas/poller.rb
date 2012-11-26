@@ -1,5 +1,6 @@
 require 'netatlas/client'
 require 'netatlas/resource'
+require 'fiber'
 class NetAtlas::Poller < NetAtlas::Resource::Base
   attr_reader :amq
   self.uri = '/pollers'
@@ -35,6 +36,11 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
   end
 
   def setup
+    $log.debug "SETUP"
+    Net::SNMP::Dispatcher.fiber_loop
+    @amq = nil
+    @command_queue = nil
+    @result_queue = nil
     setup_rabbitmq
     setup_keepalives
     setup_scheduler
@@ -55,6 +61,7 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
   end
 
   def poll(ds)
+    $log.debug "POLL #{ds.id}"
     plugin = ds.get_plugin
     #f = Fiber.current
     #plugin.poll(ds) do |result|
@@ -65,11 +72,14 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
   end
 
   def post(result)
-    collector_exchange.publish({:poller_id => id, :result => result.as_json}.to_json)
+    res = {:poller_id => id, :result => result.as_json }
+    $log.debug "POST: #{res.inspect}"
+    collector_exchange.publish(res.to_json)
   end
 
   def setup_rabbitmq
-    @rabbitmq = AMQP.connect(CONFIG['amqp'])
+    @rabbitmq = AMQP.connect(CONFIG['amqp'].symbolize_keys)
+    $log.debug "AMQP SETTINGS: #{CONFIG['amqp'].symbolize_keys}"
     # @rabbitmq.on_disconnection do
     #   exit 2
     # end
@@ -84,10 +94,13 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
 
   def do_scheduler
+    $log.debug "running scheduler"
     data_sources.values.each do |ds|
       last_polled = ds.last_result ? ds.last_result.timestamp : Time.at(0)
       interval = ds.interval || 60
+      interval = 30
       if (last_polled + interval.seconds) < Time.now
+        $log.debug "scheduling #{ds.id}"
         schedule(ds)
       end
     end
@@ -151,17 +164,18 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
   def start_command_queue
     command_queue.subscribe(:ack => true) do |hdr, msg|
-        #begin
-          msg = JSON.parse(msg)
-          $log.info "COMMAND: #{msg.inspect}"
-          command = NetAtlas::Command.create(msg)
-          command.process!
-          result_queue.publish(command.to_json, :mandatory => true)
-          hdr.ack
-        #rescue => e
-        #  $log.error e.message
-        #  $log.error e.backtrace
-        #end
+      #begin
+      msg = JSON.parse(msg)
+      puts "GOT MESSAGE #{msg.inspect}"
+      $log.info "COMMAND: #{msg.inspect}"
+      command = NetAtlas::Command.create(msg)
+      command.process!
+      result_queue.publish({:id => command.id, :result => command.result, :error => command.error}.to_json, :mandatory => true)
+      hdr.ack
+      #rescue => e
+      #  $log.error e.message
+      #  $log.error e.backtrace
+      #end
     end
   end
 
@@ -175,6 +189,8 @@ class NetAtlas::Poller < NetAtlas::Resource::Base
 
   def collector_exchange
     @collector_exchange ||= @amq.fanout("collector_exchange", :durable => true)
+    @amq.queue("collector_queue", :durable => true).bind(@collector_exchange)
+    @collector_exchange
   end
 
   def event_exchange

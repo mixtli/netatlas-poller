@@ -17,3 +17,4 @@ tmp
 netatlas-poller.sublime-project
 netatlas-poller.sublime-workspace
 spec/vcr/*
+log/

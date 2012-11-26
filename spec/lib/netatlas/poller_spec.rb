@@ -12,6 +12,7 @@ describe NetAtlas::Poller do
       channel.queue("command_#{subject.id}", :durable => true).purge 
       channel.queue('command_result', :durable => true).purge
     end
+    
   end
   before do
     Fabricate(:test_user)
@@ -36,10 +37,10 @@ describe NetAtlas::Poller do
     subject.data_sources.count.should == 5
   end
 
-  it "should discover device from the queue" do
+  it "should discover device from the queue", :vcr do
     command_msg = {
       'id' => 1,
-      'command' => 'scan',
+      'name' => 'scan',
       'arguments' => {
         'device' => {
           'id' => 1,
@@ -52,19 +53,54 @@ describe NetAtlas::Poller do
     amqp do
      # Net::SNMP::Dispatcher.run_loop
       subject.setup
-      NetAtlas::Plugin::SNMP.any_instance.should_receive(:do_scan).once.and_return({'foo' => 'bar'})
+      NetAtlas::Plugin::SNMP.any_instance.should_receive(:do_scan).once.and_return(true)
       subject.amq.direct("").publish(command_msg.to_json, :routing_key => "command_#{subject.id}")
       queue = subject.amq.queue('command_result', :durable => true)
       queue.subscribe do |hdr, msg|
         msg = JSON.parse(msg)
-        msg.should eql(command_msg.merge({
-          'result' => {
-            'status' => true,
-            'message' => 'Completed scan of lvh.me'
-          }
-        }))
+        msg.should include( 
+          'id' => 1,
+          'result' => true
+        )
         hdr.ack
         done { queue.unsubscribe; queue.delete }
+      end
+    end
+  end
+
+  it "should discover device with snmp from the queue", :vcr, :focus do
+    puts "in tets"
+    command_msg = {
+      'id' => 1,
+      'name' => 'scan',
+      'arguments' => {
+        'device' => {
+          'id' => 1,
+          'ip_address' => '127.0.0.1',
+          'hostname' => 'lvh.me'
+        }
+      }
+    }
+
+    amqp do
+     # Net::SNMP::Dispatcher.run_loop
+      subject.setup
+      #NetAtlas::Plugin::SNMP.any_instance.should_receive(:do_scan).once.and_return(true)
+      subject.amq.direct("").publish(command_msg.to_json, :routing_key => "command_#{subject.id}")
+      
+      queue = subject.amq.queue('event_queue', :durable => true).bind(subject.event_exchange)
+      queue.subscribe do |hdr, msg|
+        msg = JSON.parse(msg) 
+        msg.should include(
+          'type' => 'discover',
+          'arguments' => {
+            'type' => 'interface',
+            'ip_address' => '127.0.0.1',
+            'snmp_index' => '1'
+          }
+        )
+        hdr.ack
+        done {queue.unsubscribe; queue.delete }
       end
     end
   end

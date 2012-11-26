@@ -28,6 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activesupport', '~> 3.2.0'
   #gem.add_dependency 'rbcurse', :github => 'krumar/rbcurse'
   gem.add_dependency "net-snmp"
+  gem.add_dependency 'netatlas-client'
   gem.add_dependency  'command_line_reporter'
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rdoc')

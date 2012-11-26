@@ -5,10 +5,16 @@ gemspec
 #gem 'net-snmp' #, :path => '/Users/rmcclain/Projects/net-snmp' #:git => 'git://github.com/mixtli/net-snmp.git'
 
 if ENV['NETATLAS_ENV'] == 'development' || ENV['NETATLAS_ENV'] == 'test'
+  gem 'net-snmp', :path => '/Users/rmcclain/Projects/net-snmp'
   gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
+  gem 'rabbit_manager', :path => '/Users/rmcclain/Projects/rabbit_manager'
 else
+  gem 'net-snmp', :git => 'git@github.com:mixtli/net-snmp.git'
   gem 'netatlas-client', :git => 'git@github.com:mixtli/netatlas-client.git' 
+  gem 'rabbit_manager', :git => 'git@github.com:mixtli/rabbit_manager.git'
 end
+
+
 
 
 #gem 'rake'

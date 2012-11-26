@@ -5,7 +5,10 @@ module NetAtlas
       class_attribute :argument_types
       self.argument_types = {}
       def scan(device, arguments = nil)
-        do_scan(device, arguments)
+        f = Fiber.current
+        Fiber.new {
+          Fiber.yield do_scan(device, arguments)
+        }.resume
       end
       def do_scan(device, arguments = {})
         raise NetAtlas::Error, "must override do_scan in base class"

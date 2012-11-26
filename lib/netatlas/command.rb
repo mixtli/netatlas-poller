@@ -3,12 +3,15 @@ module NetAtlas
     class << self 
       def create(attrs)
         attrs = attrs.symbolize_keys
+        if attrs[:name].kind_of?(Symbol)
+          attrs[:name] = attrs[:name].to_s
+        end
         raise NetAtlas::Command::Error, "invalid id" unless attrs[:id].kind_of?(Integer)
-        raise NetAtlas::Command::Error, 'invalid command' unless attrs[:command].kind_of?(String)
+        raise NetAtlas::Command::Error, "invalid command #{attrs[:name]}" unless attrs[:name].kind_of?(String)
         begin
-          klass = eval  "#{class_name(attrs[:command])}"
+          klass = eval  "#{class_name(attrs[:name])}"
         rescue NameError
-          raise NetAtlas::Command::Error, "invalid command #{attrs[:command]}"
+          raise NetAtlas::Command::Error, "invalid command #{attrs[:name]}"
         end
         klass.new(attrs)
       end
@@ -18,16 +21,20 @@ module NetAtlas
     end
     
     class Base
-      attr_accessor :id, :arguments, :command, :result
+      attr_accessor :id, :arguments, :name, :result, :error, :message
       def initialize(attrs)
-        @command = attrs[:command]
+        @name = attrs[:name]
         @arguments = attrs[:arguments]
         @id = attrs[:id]
         @result = {}
       end
 
       def process!
+        begin
         @result = do_process
+        rescue => e
+          @error = e.message
+        end
       end
 
       def do_process
@@ -36,7 +43,7 @@ module NetAtlas
 
       def to_json
         {
-          :command => @command,
+          :name=> @name,
           :id => @id,
           :result => @result,
           :arguments => @arguments

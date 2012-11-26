@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe NetAtlas::Event do
+describe NetAtlas::Resource::Event do
 
 end

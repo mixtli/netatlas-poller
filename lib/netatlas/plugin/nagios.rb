@@ -4,8 +4,6 @@ class NetAtlas::Plugin::Nagios < NetAtlas::Plugin::Base
     attr_accessor :check_script, :perf_field
   end
   self.argument_types = {
-    warning_threshold: { type: Integer, default: 5 },
-    critical_threshold: { type: Integer, default: 10 },
     additional_arguments: { type: String }
   }
 
@@ -16,6 +14,7 @@ class NetAtlas::Plugin::Nagios < NetAtlas::Plugin::Base
   def do_poll(data_source, &block)
     cmd = "#{CONFIG[:nagios][:plugin_dir]}/#{self.class.check_script} " 
     cmd += build_args(data_source)
+    $log.debug "NAGIOS: #{cmd}"
     EM.system(cmd) { |output, status|
       value = get_value(output, status)
       block.call NetAtlas::Result.new :data_source => data_source, :value => value, :state => SEVERITIES[status.exitstatus].to_s, :additional => output

@@ -11,12 +11,9 @@ require "netatlas/config"
 require 'netatlas/resource'
 require "netatlas/poller"
 require 'netatlas/command'
-Dir[File.dirname(__FILE__) + '/netatlas/command/*.rb'].each {|f| require f }
 require 'netatlas/plugin'
+Dir[File.dirname(__FILE__) + '/netatlas/command/*.rb'].each {|f| require f }
 Dir[File.dirname(__FILE__) + '/netatlas/plugin/*.rb'].each {|f| require f }
-require 'netatlas/resource/node'
-require "netatlas/resource/data_source"
-require 'netatlas/resource/device'
-require 'netatlas/event'
+Dir[File.dirname(__FILE__) + '/netatlas/resource/*.rb'].each {|f| require f }
 require 'netatlas/renderer/table'
 
