@@ -3,7 +3,7 @@
 
 ENV['NETATLAS_ENVIRONMENT'] = 'test'
 
-guard 'rspec', :version => 2, :cli => "--tty --color" do
+guard 'rspec', :version => 2, :cli => "--tty --color --fail-fast -b" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

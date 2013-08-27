@@ -24,17 +24,24 @@ module NetAtlas
       attr_accessor :id, :arguments, :name, :result, :error, :message
       def initialize(attrs)
         @name = attrs[:name]
-        @arguments = attrs[:arguments]
+        @arguments = attrs[:arguments] || {}
         @id = attrs[:id]
-        @result = {}
+        @result = nil
       end
 
       def process!
+        @result = nil
         begin
-        @result = do_process
+          @result = do_process
         rescue => e
           @error = e.message
+          $log.debug e.message
+          $log.debug e.backtrace
+          puts e.message
+          puts e.backtrace
         end
+        puts "DONE process"
+        @result
       end
 
       def do_process

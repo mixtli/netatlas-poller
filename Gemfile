@@ -6,7 +6,7 @@ gemspec
 
 if ENV['NETATLAS_ENV'] == 'development' || ENV['NETATLAS_ENV'] == 'test'
   gem 'net-snmp', :path => '/Users/rmcclain/Projects/net-snmp'
-  gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client'
+  gem 'netatlas-client', :path => '/Users/rmcclain/Projects/netatlas-client', :require => 'netatlas/client'
   gem 'rabbit_manager', :path => '/Users/rmcclain/Projects/rabbit_manager'
 else
   gem 'net-snmp', :git => 'git@github.com:mixtli/net-snmp.git'
@@ -14,10 +14,7 @@ else
   gem 'rabbit_manager', :git => 'git@github.com:mixtli/rabbit_manager.git'
 end
 
-
-
-
-#gem 'rake'
+gem 'bunny'
 gem 'rspec'
 gem 'evented-spec'
 gem 'guard'
@@ -28,6 +25,7 @@ gem 'pg'
 gem 'sequel'
 gem 'vcr'
 gem 'fakeweb'
+gem 'webmock'
 gem 'pry'
 gem 'pry-remote'
 gem 'pry-stack_explorer'
@@ -37,3 +35,5 @@ gem 'fabrication'
 gem 'aruba'
 gem 'rbcurse-core', :github => 'rkumar/rbcurse-core'
 gem 'simplecov', :require => false
+gem 'her', :github => 'remiprev/her'
+#gem 'mocha', :require => false

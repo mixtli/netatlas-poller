@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe NetAtlas::Command::AddDataSource do
 
-  it "should create a valid add_data_source command" do
+  it "should create a valid add_data_source command", :vcr, :truncate do
     poller = NetAtlas::Poller.new
     poller.stub(:get_data_sources => {})
     NetAtlas::Poller.stub(:instance => poller)

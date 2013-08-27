@@ -1,3 +1,4 @@
+require 'open4'
 class NetAtlas::Plugin::Nagios < NetAtlas::Plugin::Base
   SEVERITIES = [:ok, :warning, :critical, :unknown, :error]
   class << self
@@ -12,18 +13,18 @@ class NetAtlas::Plugin::Nagios < NetAtlas::Plugin::Base
   end
 
   def do_poll(data_source, &block)
-    cmd = "#{CONFIG[:nagios][:plugin_dir]}/#{self.class.check_script} " 
+    cmd = "#{NETATLAS_CONFIG[:nagios][:plugin_dir]}/#{self.class.check_script} " 
     cmd += build_args(data_source)
-    $log.debug "NAGIOS: #{cmd}"
-    EM.system(cmd) { |output, status|
-      value = get_value(output, status)
-      block.call NetAtlas::Result.new :data_source => data_source, :value => value, :state => SEVERITIES[status.exitstatus].to_s, :additional => output
-    }
+    value = nil
+    pid, stdin, stdout, stderr = Open4::popen4(cmd) 
+    _, status = Process::waitpid2 pid
+    value = get_value(stdout.read, status.exitstatus)
+    NetAtlas::Result.new :data_source => data_source, :value => value, :state => SEVERITIES[status.exitstatus].to_s, :additional => stdout
   end
 
   def build_args(data_source)
     args = ["-H #{data_source.ip_address}"]
-    args << ["-p #{data_source.port}"] if data_source.port
+    #args << ["-p #{data_source.port}"] if data_source.port
     arguments = data_source.arguments || {}
     arguments.each do |k, v|
       key = "--" + k.to_s.gsub("_", "-")

@@ -1,8 +1,7 @@
 module NetAtlas::Resource
   class Event < NetAtlas::Resource::Base
     def publish
-      poller = NetAtlas::Poller.instance
-      poller.event_exchange.publish(self.to_json) 
+      Celluloid::Actor[:event_publisher].publish(self)
     end
   end
 end

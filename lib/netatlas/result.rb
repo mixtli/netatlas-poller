@@ -1,6 +1,6 @@
 class NetAtlas::Result
   STATUSES = [:ok, :warning, :critical, :unknown, :error]
-  attr_accessor :state, :value, :additional, :timestamp, :data_source_id
+  attr_accessor :state, :value, :additional, :timestamp, :data_source_id, :poller_id
 
   def initialize(args)
     @state = args[:state].to_s
@@ -14,7 +14,7 @@ class NetAtlas::Result
     "#{@state} #{@value} #{@additional}"
   end
 
-  def as_json
-    {:state => @state, :additional => @additional, :value => @value, :data_source_id => @data_source_id}
+  def as_json(options = {})
+    {:state => @state, :additional => @additional, :value => @value, :data_source_id => @data_source_id, :poller_id => @poller_id}
   end
 end

@@ -1,5 +1,5 @@
 development:
-  netatlas_url: http://netatlas.dev
+  netatlas_url: http://netatlas.lvh.me
   netatlas_user: test@netatlas.com
   netatlas_password: password
   logfile: /Users/rmcclain/Projects/netatlas-poller/log/poller.log
@@ -13,7 +13,7 @@ development:
     :plugin_dir: /usr/local/sbin
 
 test:
-  netatlas_url: http://test.lvh.me:3001
+  netatlas_url: http://test.netatlas.lvh.me
   netatlas_user: test@netatlas.com
   netatlas_password: password
   logfile: /tmp/poller.log

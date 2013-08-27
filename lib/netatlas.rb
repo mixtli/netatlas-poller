@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.setup
 require 'amqp'
 require 'net-snmp'
 require 'faraday'
@@ -12,6 +14,7 @@ require 'netatlas/resource'
 require "netatlas/poller"
 require 'netatlas/command'
 require 'netatlas/plugin'
+require 'netatlas/poller_group'
 Dir[File.dirname(__FILE__) + '/netatlas/command/*.rb'].each {|f| require f }
 Dir[File.dirname(__FILE__) + '/netatlas/plugin/*.rb'].each {|f| require f }
 Dir[File.dirname(__FILE__) + '/netatlas/resource/*.rb'].each {|f| require f }

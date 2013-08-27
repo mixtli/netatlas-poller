@@ -1,16 +1,27 @@
 GIT
-  remote: git://github.com/rkumar/rbcurse-core.git
-  revision: 0d91c52780f967bfebf9c83772fefa42963a94b8
+  remote: git://github.com/remiprev/her.git
+  revision: e8d5d3127a715464d1bcda76a7bcde5c08dce7ba
   specs:
-    rbcurse-core (0.0.3)
+    her (0.6.8)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      faraday (~> 0.8)
+      multi_json (~> 1.7)
+
+GIT
+  remote: git://github.com/rkumar/rbcurse-core.git
+  revision: 7d74af09baeb507b020c14bde6745628f1e43f8c
+  specs:
+    rbcurse-core (0.0.14)
       ffi-ncurses (>= 0.4.0)
 
 PATH
   remote: .
   specs:
     netatlas-poller (0.0.1)
-      activesupport (~> 3.2.0)
+      activesupport (~> 4.0.0)
       amqp
+      celluloid
       command_line_reporter
       daemons
       eventmachine (~> 1.0.0.beta.4)
@@ -19,6 +30,7 @@ PATH
       gli (= 2.0.0.rc4)
       net-snmp
       netatlas-client
+      open4
 
 PATH
   remote: /Users/rmcclain/Projects/net-snmp
@@ -31,7 +43,7 @@ PATH
   remote: /Users/rmcclain/Projects/netatlas-client
   specs:
     netatlas-client (0.0.1)
-      activesupport (~> 3.2.0)
+      activesupport (~> 4.0.0)
       command_line_reporter
       faraday
       faraday_middleware
@@ -48,55 +60,70 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (3.2.8)
-      i18n (~> 0.6)
-      multi_json (~> 1.0)
-    amq-client (0.9.5)
-      amq-protocol (>= 0.9.4)
+    activemodel (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
+    activesupport (4.0.0)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    addressable (2.3.5)
+    amq-client (1.0.2)
+      amq-protocol (>= 1.2.0)
       eventmachine
-    amq-protocol (0.9.5)
-    amqp (0.9.8)
-      amq-client (~> 0.9.5)
-      amq-protocol (>= 0.9.4)
+    amq-protocol (1.7.0)
+    amqp (1.0.2)
+      amq-client (~> 1.0.2)
+      amq-protocol (>= 1.3.0)
       eventmachine
-    aruba (0.4.11)
-      childprocess (>= 0.2.3)
+    aruba (0.5.3)
+      childprocess (>= 0.3.6)
       cucumber (>= 1.1.1)
-      ffi (>= 1.0.11)
-      rspec (>= 2.7.0)
-    binding_of_caller (0.6.8)
-    builder (3.1.3)
-    childprocess (0.3.5)
-      ffi (~> 1.0, >= 1.0.6)
-    coderay (1.0.8)
+      rspec-expectations (>= 2.7.0)
+    atomic (1.1.13)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    builder (3.1.4)
+    bunny (0.10.2)
+      amq-protocol (>= 1.6.0)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
+    coderay (1.0.9)
     colored (1.2)
     columnize (0.3.6)
     command_line_reporter (3.2.1)
       colored (>= 1.2)
-    cucumber (1.2.1)
+    crack (0.4.1)
+      safe_yaml (~> 0.9.0)
+    cucumber (1.3.6)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.3)
-      gherkin (~> 2.11.0)
-      json (>= 1.4.6)
+      gherkin (~> 2.12.0)
+      multi_json (~> 1.7.5)
+      multi_test (>= 0.0.2)
     daemons (1.1.9)
-    database_cleaner (0.9.1)
-    debugger (1.1.4)
+    database_cleaner (1.1.1)
+    debug_inspector (0.0.2)
+    debugger (1.6.1)
       columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.3)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.3)
-    diff-lcs (1.1.3)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
+    diff-lcs (1.2.4)
     evented-spec (0.9.0)
-    eventmachine (1.0.0)
-    fabrication (2.4.0)
+    eventmachine (1.0.3)
+    fabrication (2.7.2)
     fakeweb (1.3.0)
-    faraday (0.8.4)
-      multipart-post (~> 1.1)
-    faraday_middleware (0.8.8)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    ffi (1.1.5)
+    ffi (1.9.0)
     ffi-inliner (0.2.4)
       ffi (>= 0.4.0)
     ffi-locale (1.0.1)
@@ -104,67 +131,92 @@ GEM
     ffi-ncurses (0.4.0)
       ffi (>= 1.0.9)
       ffi-locale (>= 1.0.0)
-    gherkin (2.11.4)
-      json (>= 1.4.6)
+    formatador (0.2.4)
+    gherkin (2.12.1)
+      multi_json (~> 1.3)
     gli (2.0.0.rc4)
-    guard (1.4.0)
-      listen (>= 0.4.2)
+    guard (1.8.2)
+      formatador (>= 0.2.4)
+      listen (>= 1.0.0)
+      lumberjack (>= 1.0.2)
+      pry (>= 0.9.10)
       thor (>= 0.14.6)
-    guard-ctags-bundler (0.1.6)
+    guard-ctags-bundler (0.2.0)
       guard (>= 1.1)
-    guard-rspec (2.1.0)
-      guard (>= 1.1)
-      rspec (~> 2.11)
-    i18n (0.6.1)
-    json (1.7.5)
-    listen (0.5.3)
-    method_source (0.8)
-    mime-types (1.19)
-    multi_json (1.3.6)
-    multipart-post (1.1.5)
+    guard-rspec (3.0.2)
+      guard (>= 1.8)
+      rspec (~> 2.13)
+    i18n (0.6.5)
+    json (1.8.0)
+    listen (1.3.0)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      rb-kqueue (>= 0.2)
+    lumberjack (1.0.4)
+    method_source (0.8.2)
+    mime-types (1.24)
+    minitest (4.7.5)
+    multi_json (1.7.9)
+    multi_test (0.0.2)
+    multipart-post (1.2.0)
     nice-ffi (0.4)
       ffi (>= 0.5.0)
-    pg (0.14.1)
-    pry (0.9.10)
+    open4 (1.3.0)
+    pg (0.16.0)
+    pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
-      slop (~> 3.3.1)
-    pry-debugger (0.2.0)
-      debugger (~> 1.1.3)
-      pry (~> 0.9.9)
-    pry-remote (0.1.6)
+      slop (~> 3.4)
+    pry-debugger (0.2.2)
+      debugger (~> 1.3)
+      pry (~> 0.9.10)
+    pry-remote (0.1.7)
       pry (~> 0.9)
       slop (~> 3.0)
-    pry-stack_explorer (0.4.7)
-      binding_of_caller (~> 0.6.8)
-    rake (0.9.2.2)
-    rb-fsevent (0.9.2)
-    rdoc (3.12)
+    pry-stack_explorer (0.4.9.1)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
+    rake (10.1.0)
+    rb-fsevent (0.9.3)
+    rb-inotify (0.9.1)
+      ffi (>= 0.5.0)
+    rb-kqueue (0.2.0)
+      ffi (>= 0.5.0)
+    rdoc (4.0.1)
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.11.0)
-      rspec-core (~> 2.11.0)
-      rspec-expectations (~> 2.11.0)
-      rspec-mocks (~> 2.11.0)
-    rspec-core (2.11.1)
-    rspec-expectations (2.11.3)
-      diff-lcs (~> 1.1.3)
-    rspec-mocks (2.11.3)
-    sequel (3.40.0)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.5)
+    rspec-expectations (2.14.2)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.3)
+    safe_yaml (0.9.5)
+    sequel (4.1.1)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    slop (3.3.3)
-    thor (0.16.0)
-    vcr (2.2.5)
+    slop (3.4.6)
+    thor (0.18.1)
+    thread_safe (0.1.2)
+      atomic
+    timers (1.1.0)
+    tzinfo (0.3.37)
+    vcr (2.5.0)
+    webmock (1.13.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aruba
+  bunny
   database_cleaner
   evented-spec
   fabrication
@@ -172,6 +224,7 @@ DEPENDENCIES
   guard
   guard-ctags-bundler
   guard-rspec
+  her!
   net-snmp!
   netatlas-client!
   netatlas-poller!
@@ -189,3 +242,4 @@ DEPENDENCIES
   sequel
   simplecov
   vcr
+  webmock

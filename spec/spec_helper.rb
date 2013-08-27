@@ -16,6 +16,10 @@ require 'aruba/api'
 require 'rabbit_manager'
 
 
+ENV['NETATLAS_ENV'] = 'test'
+
+Thread.abort_on_exception = true
+
 SimpleCov.start if File.basename($0) == 'rspec'
 
 DB = Sequel.connect('postgres://postgres@localhost/netatlas_test')
@@ -24,6 +28,8 @@ require 'mocks/poller_mock'
 require 'netatlas/factories'
 Dir['./spec/support/*.rb'].map {|f| require f}
 
+NetAtlas.setup(:url => 'http://test.netatlas.lvh.me', :user => 'admin@netatlas.com', :password => 'password')
+
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
@@ -31,11 +37,13 @@ RSpec.configure do |config|
   config.include Aruba::Api, :example_group => {
     :file_path => /spec\/acceptance/
   }
+  #config.mock_framework = :mocha
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do 
+    EM.stop if EM.reactor_running?
     rabbit = RabbitManager.new("http://guest:guest@localhost:55672")
     begin
       rabbit.delete_vhost("netatlas_test")
@@ -43,6 +51,7 @@ RSpec.configure do |config|
     end
     rabbit.add_vhost("netatlas_test")
     rabbit.add_permission("netatlas", {'read' => '.*', 'write' => '.*', 'configure' => '.*'}, {:vhost => 'netatlas_test'})
+    rabbit.add_permission("guest", {'read' => '.*', 'write' => '.*', 'configure' => '.*'}, {:vhost => 'netatlas_test'})
     DatabaseCleaner.clean
     Fabricate(:admin)
   end
@@ -51,4 +60,3 @@ RSpec.configure do |config|
   end
 end
 ENV['PATH'] = "#{File.expand_path(File.dirname(__FILE__) + '/bin')}#{File::PATH_SEPARATOR}#{ENV['PATH']}"
-$log.level = Logger::WARN

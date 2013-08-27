@@ -25,11 +25,13 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'eventmachine', '~> 1.0.0.beta.4'
   gem.add_dependency 'faraday'
   gem.add_dependency 'faraday_middleware'
-  gem.add_dependency 'activesupport', '~> 3.2.0'
+  gem.add_dependency 'activesupport', '~> 4.0.0'
   #gem.add_dependency 'rbcurse', :github => 'krumar/rbcurse'
   gem.add_dependency "net-snmp"
   gem.add_dependency 'netatlas-client'
   gem.add_dependency  'command_line_reporter'
+  gem.add_dependency 'celluloid'
+  gem.add_dependency 'open4'
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rdoc')
   gem.add_runtime_dependency('gli', '2.0.0.rc4')  
