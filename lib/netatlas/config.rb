@@ -1,4 +1,5 @@
-filename = File.dirname(__FILE__) + "/../../config/netatlas.yml"
+#filename = File.dirname(__FILE__) + "/../../config/netatlas.yml"
+filename = "/etc/netatlas/netatlas.yml"
 env = ENV['NETATLAS_ENV'] || 'production'
 NETATLAS_CONFIG = HashWithIndifferentAccess.new(YAML.load_file(filename)[env])
 
