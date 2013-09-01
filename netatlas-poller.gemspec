@@ -15,8 +15,8 @@ Gem::Specification.new do |gem|
   gem.name          = "netatlas-poller"
   gem.require_paths = ["lib"]
   gem.has_rdoc      = true
-  gem.extra_rdoc_files = ['README.rdoc', 'netatlas.rdoc']
-  gem.rdoc_options << '--title' << 'todo' << '--main' << 'README.rdoc' << '-ri'
+  gem.extra_rdoc_files = ['netatlas.rdoc']
+  gem.rdoc_options << '--title' << 'todo' << '--main' << 'README.md' << '-ri'
   gem.version       = NetAtlas::VERSION
 
   gem.add_dependency "daemons"
