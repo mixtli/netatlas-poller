@@ -25,10 +25,11 @@ GIT
 
 GIT
   remote: git@github.com:mixtli/netatlas-client.git
-  revision: e3fba34a810d85e4407768c0c60897d80e51d9e4
+  revision: ef352217edbab18d3678b966bf2aa82c824a86b1
+  branch: staging
   specs:
     netatlas-client (0.0.1)
-      activesupport
+      activesupport (~> 4.0.0)
       command_line_reporter
       faraday
       faraday_middleware
