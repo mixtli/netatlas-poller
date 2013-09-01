@@ -15,6 +15,33 @@ GIT
     rbcurse-core (0.0.14)
       ffi-ncurses (>= 0.4.0)
 
+GIT
+  remote: git@github.com:mixtli/net-snmp.git
+  revision: 490fa59d1a8b46c9d26b7288b2f9d4b2a47ff70f
+  specs:
+    net-snmp (0.2.5)
+      ffi-inliner
+      nice-ffi
+
+GIT
+  remote: git@github.com:mixtli/netatlas-client.git
+  revision: e3fba34a810d85e4407768c0c60897d80e51d9e4
+  specs:
+    netatlas-client (0.0.1)
+      activesupport
+      command_line_reporter
+      faraday
+      faraday_middleware
+      gli (= 2.0.0.rc4)
+      i18n
+      json
+
+GIT
+  remote: git@github.com:mixtli/rabbit_manager.git
+  revision: c3d057f39dfebe3b24edee177fa74b7a2cddbdfa
+  specs:
+    rabbit_manager (0.0.1)
+
 PATH
   remote: .
   specs:
@@ -31,31 +58,6 @@ PATH
       net-snmp
       netatlas-client
       open4
-
-PATH
-  remote: /Users/rmcclain/Projects/net-snmp
-  specs:
-    net-snmp (0.2.5)
-      ffi-inliner
-      nice-ffi
-
-PATH
-  remote: /Users/rmcclain/Projects/netatlas-client
-  specs:
-    netatlas-client (0.0.1)
-      activesupport (~> 4.0.0)
-      command_line_reporter
-      faraday
-      faraday_middleware
-      gli (= 2.0.0.rc4)
-      i18n
-      json
-
-PATH
-  remote: /Users/rmcclain/Projects/rabbit_manager
-  specs:
-    rabbit_manager (0.0.1)
-      rest-client
 
 GEM
   remote: https://rubygems.org/
@@ -154,7 +156,6 @@ GEM
       rb-kqueue (>= 0.2)
     lumberjack (1.0.4)
     method_source (0.8.2)
-    mime-types (1.24)
     minitest (4.7.5)
     multi_json (1.7.9)
     multi_test (0.0.2)
@@ -184,8 +185,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.0.1)
       json (~> 1.4)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
